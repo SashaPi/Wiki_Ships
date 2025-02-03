@@ -21,24 +21,24 @@
         </ul>
     </nav>
 
-   <!-- <div class="container">
+   <div class="container">
         <!-- Форма загрузки -->
-       <!-- section class="upload-section">
+      <section class="upload-section">
             <form class="upload-form" id="uploadForm" enctype="multipart/form-data">
                 <input type="file" class="upload-input" id="fileInput" accept="image/*" multiple>
                 <button type="submit" class="upload-button">Загрузить фото</button>
                 <small>Максимальный размер файла: 500 МБ</small>
             </form>
-       </section-->
+      </section>
 
-       <!-- Галерея -->
-     <!--div class="gallery-grid" id="gallery"></div-->
+      <!-- Галерея -->
+     <div class="gallery-grid" id="gallery"></div>
 
         <!-- Кнопка назад -->
-        <!-- a href="index.html" class="back-button">← На главную</a-->
+        <a href="index.html" class="back-button">← На главную</a>
      </div>
 
-    <!--script>
+    <script>
         // Локальное хранилище для демонстрации
         let galleryItems = JSON.parse(localStorage.getItem('gallery')) || [];
 
@@ -89,119 +89,6 @@
 
         // Первоначальная загрузка
         renderGallery();
-</script-->
-    <div class="container">
-        <h1>Галерея теплоходов</h1>
-        
-        <div class="upload-section">
-            <label class="upload-btn" for="fileInput">
-                Загрузить фото
-            </label>
-            <input type="file" id="fileInput" accept="image/*">
-            <button class="upload-btn" id="saveBtn">Сохранить фотографии</button>
-        </div>
-
-        <div class="gallery" id="gallery"></div>
-    </div>
-
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js"></script>
-
-    <script>
-        // Конфигурация Firebase (замените на свои данные)
-        const firebaseConfig = {
-            apiKey: "ВАШ_API_KEY",
-            authDomain: "ВАШ_AUTH_DOMAIN",
-            projectId: "ВАШ_PROJECT_ID",
-            storageBucket: "ВАШ_STORAGE_BUCKET",
-            messagingSenderId: "ВАШ_MESSAGING_SENDER_ID",
-            appId: "ВАШ_APP_ID"
-        };
-
-        // Инициализация Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const storage = firebase.storage();
-
-        const gallery = document.getElementById('gallery');
-        const fileInput = document.getElementById('fileInput');
-        const saveBtn = document.getElementById('saveBtn');
-
-        // Загрузка фото в Firebase Storage
-        fileInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const storageRef = storage.ref('images/' + file.name);
-                const uploadTask = storageRef.put(file);
-
-                uploadTask.on('state_changed', 
-                    (snapshot) => {
-                        // Прогресс загрузки
-                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        console.log('Загрузка: ' + progress + '%');
-                    },
-                    (error) => {
-                        console.error('Ошибка загрузки:', error);
-                    },
-                    () => {
-                        // Успешная загрузка
-                        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                            console.log('Фото доступно по ссылке:', downloadURL);
-                            addPhotoToGallery(downloadURL);
-                        });
-                    }
-                );
-            }
-        });
-
-        // Загрузка всех фото из Firebase Storage
-        function loadPhotos() {
-            const storageRef = storage.ref('images/');
-            storageRef.listAll().then((result) => {
-                result.items.forEach((itemRef) => {
-                    itemRef.getDownloadURL().then((url) => {
-                        addPhotoToGallery(url);
-                    });
-                });
-            }).catch((error) => {
-                console.error('Ошибка загрузки фото:', error);
-            });
-        }
-
-        // Добавление фото в галерею
-        function addPhotoToGallery(src) {
-            const card = document.createElement('div');
-            card.className = 'photo-card';
-            
-            const img = document.createElement('img');
-            img.src = src;
-            
-            const deleteBtn = document.createElement('button');
-            deleteBtn.className = 'delete-btn';
-            deleteBtn.innerHTML = '×';
-            deleteBtn.onclick = () => {
-                card.remove();
-                deletePhotoFromStorage(src);
-            };
-
-            card.appendChild(img);
-            card.appendChild(deleteBtn);
-            gallery.appendChild(card);
-        }
-
-        // Удаление фото из Firebase Storage
-        function deletePhotoFromStorage(url) {
-            const storageRef = storage.refFromURL(url);
-            storageRef.delete().then(() => {
-                console.log('Фото удалено');
-            }).catch((error) => {
-                console.error('Ошибка удаления:', error);
-            });
-        }
-
-        // Загрузка фото при открытии страницы
-        window.addEventListener('load', loadPhotos);
-    </script>
-    
+</script>  
 </body>
 </html>
