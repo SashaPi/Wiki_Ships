@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Галерея</title>
+</head>
+<body>
+    <!-- Меню -->
+    <nav class="menu">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="sourse.html">Источники</a></li>
+            <li><a href="cruise.html">Круизные теплоходы</a></li>
+            <li><a href="technicsea.html">Технический транспорт</a></li>
+            <li><a href="oldship.html">Старые теплоходы</a></li>
+            <li><a href="promenadship.html">Прогулочные теплоходы</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Форма загрузки -->
+        <section class="upload-section">
+            <form class="upload-form" id="uploadForm" enctype="multipart/form-data">
+                <input type="file" class="upload-input" id="fileInput" accept="image/*" multiple>
+                <button type="submit" class="upload-button">Загрузить фото</button>
+                <small>Максимальный размер файла: 500 МБ</small>
+            </form>
+        </section>
+
+        <!-- Галерея -->
+        <div class="gallery-grid" id="gallery"></div>
+
+        <!-- Кнопка назад -->
+        <a href="index.html" class="back-button">← На главную</a>
+    </div>
+
+    <script>
+        // Локальное хранилище для демонстрации
+        let galleryItems = JSON.parse(localStorage.getItem('gallery')) || [];
+
+        // Отображение галереи
+        function renderGallery() {
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = galleryItems.map((item, index) => `
+                <div class="gallery-item">
+                    <img src="${item.url}" class="gallery-img" alt="Теплоход">
+                    <button class="delete-btn" onclick="deletePhoto(${index})">×</button>
+                </div>
+            `).join('');
+        }
+
+        // Удаление фото
+        function deletePhoto(index) {
+            galleryItems.splice(index, 1);
+            localStorage.setItem('gallery', JSON.stringify(galleryItems));
+            renderGallery();
+        }
+
+        // Загрузка сохраненных фото при загрузке страницы
+        window.addEventListener('load', () => {
+            const savedPhotos = JSON.parse(localStorage.getItem('galleryPhotos') || '[]');
+            savedPhotos.forEach(src => addPhotoToGallery(src));
+        });
+
+        // Обработка загрузки
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const files = document.getElementById('fileInput').files;
+
+            for(let file of files) {
+                if(file.size > 500 * 1024 * 1024) {
+                    alert('Файл слишком большой! Максимум 500 МБ');
+                    continue;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    galleryItems.push({ url: e.target.result });
+                    localStorage.setItem('gallery', JSON.stringify(galleryItems));
+                    renderGallery();
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Первоначальная загрузка
+        renderGallery();
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Подробная информация/список литературы о теплоходах</title>
+</head>
+<body>
+    <!-- Меню -->
+    <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav class="menu" id="mainMenu">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="cruise.html">Круизные теплоходы</a></li>
+            <li><a href="technicsea.html">Технический транспорт</a></li>
+            <li><a href="oldship.html">Старые теплоходы</a></li>
+            <li><a href="promenadship.html">Прогулочные теплоходы</a></li>
+            <li><a href="gallery.html">Галерея</a></li>
+        </ul>
+    </nav>
+
+    <!-- Основной контент -->
+    <div class="content">
+        <div class="info-section">
+            <h1>Подробная информация и список литературы о теплоходах</h1>
+            
+            <div class="links-grid">
+                <div class="info-card">
+                    <h3>Водоходъ</h3>
+                    <a href="https://vodohod.com/">Подробнее →</a>
+                </div>
+
+                <div class="info-card">
+                    <h3>Донинтурфлот</h3>
+                    <a href="https://doninturflot.com/">Подробнее →</a>
+                </div>
+
+                <div class="info-card">
+                    <h3>Созвездие</h3>
+                    <a href="https://s-cruises.com/">Подробнее →</a>
+                </div>
+
+                <div class="info-card">
+                    <h3>Мостурфлот</h3>
+                    <a href="https://www.mosturflot.ru/">Подробнее →</a>
+                </div>
+                <div class="info-card">
+                    <h3>ГАМА</h3>
+                    <a href="https://gama-nn.ru/">Подробнее →</a>
+                </div>
+
+                <div class="info-card">
+                    <h3>Инфофлот</h3>
+                    <a href="https://www.infoflot.com/">Подробнее →</a>
+                </div>
+
+                <div class="info-card">
+                    <h3>River Tickets</h3>
+                    <a href="https://rivertickets.ru/"">Подробнее →</a>
+                </div>
+
+                <div class="info-card">
+                    <h3>Расписание теплоходов</h3>
+                    <a href="https://kruiz.online/departures">Подробнее →</a>
+                </div>
+
+                <div class="info-card">
+                    <h3>Полная информация о всех водных траспортах</h3>
+                    <a href="https://fleetphoto.ru/">Подробнее →</a>
+                </div>
+
+               
+            </div>
+
+            <a href="index.html" class="back-button">Вернуться на главную</a>
+        </div>
+    </div>
+
+    <script>
+        // Скрипт для работы меню
+        const menuToggle = document.getElementById('menuToggle');
+        const mainMenu = document.getElementById('mainMenu');
+
+        menuToggle.addEventListener('click', () => {
+            mainMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && 
+                !mainMenu.contains(e.target) && 
+                !menuToggle.contains(e.target)) {
+                mainMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                mainMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    </script>
+    <script src="js/code.jquery.com_jquery-3.7.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>

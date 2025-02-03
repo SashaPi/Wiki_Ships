@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki Ships</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <img src="imges/логотип.png" alt="logo" height="150px">
+  
+  <button class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<nav class="menu" id="mainMenu">
+    <ul>
+        <li><a href="about.html">О нас</a></li>
+        <li><a href="sourse.html">Источники</a></li>
+        <li><a href="cruise.html">Круизные теплоходы</a></li>
+        <li><a href="technicsea.html">Технический транспорт</a></li>
+        <li><a href="oldship.html">Старые теплоходы</a></li>
+        <li><a href="promenadship.html">Прогулочные теплоходы</a></li>
+        <li><a href="gallery.html">Галерея</a></li>
+    </ul>
+</nav>
+
+<main class="content">
+    <h1>Главная страница</h1>
+    <img src="imges/content.png" alt="Канал и Шлюзы" height="650px">
+</main>
+
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mainMenu = document.getElementById('mainMenu');
+    let isMenuClosed = false;
+
+    // Обработчик клика по кнопке
+    menuToggle.addEventListener('click', () => {
+        mainMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+        if (window.innerWidth >= 769) {
+            mainMenu.classList.toggle('closed');
+            isMenuClosed = mainMenu.classList.contains('closed');
+        }
+    });
+
+    // Закрытие меню при клике вне области
+    document.addEventListener('click', (e) => {
+        if (!mainMenu.contains(e.target) && 
+            !menuToggle.contains(e.target) && 
+            window.innerWidth < 769) {
+            mainMenu.classList.remove('active');
+            menuToggle.classList.remove('active');
+        }
+    });
+
+    // Обработчик изменения размера окна
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 769) {
+            if (!isMenuClosed) mainMenu.classList.remove('closed');
+            menuToggle.classList.remove('active');
+        } else {
+            mainMenu.classList.remove('active');
+        }
+    });
+</script>
+ <script src="js/code.jquery.com_jquery-3.7.1.min.js"></script>
+ <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>О Нас</title>
+</head>
+<body>
+    <!-- Меню -->
+    <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav class="menu" id="mainMenu">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="sourse.html">Источники</a></li>
+            <li><a href="cruise.html">Круизные теплоходы</a></li>
+            <li><a href="technicsea.html">Технический транспорт</a></li>
+            <li><a href="oldship.html">Старые теплоходы</a></li>
+            <li><a href="promenadship.html">Прогулочные теплоходы</a></li>
+            <li><a href="gallery.html">Галерея</a></li>
+        </ul>
+    </nav>
+
+    <!-- Контент страницы -->
+    <div class="about-content">
+        <div class="about-section">
+            <h1>Добро пожаловать на информационный сайт!</h1>
+            
+            <p>Здесь вы сможете найти всю информацию о теплоходах и других водных судах, которые уже многие годы плавают и продолжают свою работу, выполняют технические задания, а также о тех судах, которые больше не эксплуатируются или чье текущее местоположение неизвестно.   
+            </p>
+
+            <p>На нашем сайте вы найдете:</p>
+            
+            <ul style="margin-left: 20px; color: #34495e;">
+                <li>Подробную информацию о теплоходах, расписание круизов, круизы и прочее </li>
+                <li>Информацию о всех теплоходов и технических траспортов</li
+                <li>Фотогалерею с возможностью добавления своих фото</li>
+            </ul>
+
+            <a href="index.html" class="back-button">Вернуться на главную</a>
+        </div>
+    </div>
+
+    <script>
+        // Скрипт для работы меню
+        const menuToggle = document.getElementById('menuToggle');
+        const mainMenu = document.getElementById('mainMenu');
+
+        menuToggle.addEventListener('click', () => {
+            mainMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && 
+                !mainMenu.contains(e.target) && 
+                !menuToggle.contains(e.target)) {
+                mainMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                mainMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    </script>
+    <script src="js/code.jquery.com_jquery-3.7.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>
