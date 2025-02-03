@@ -262,115 +262,98 @@ h1 {
     }
 }
 
-/* Контейнер галереи */
-.container {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 20px;
-}
+/* Контейнер фотогалереи */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-/* Форма загрузки */
-.upload-section {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-    margin-bottom: 40px;
-} 
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
 
-.upload-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-} 
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-.upload-input {
-    padding: 15px;
-    border: 2px dashed #3498db;
-    border-radius: 5px;
-    text-align: center;
-} 
+        .gallery-title {
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+        }
 
-.upload-button {
-    background: #3498db;
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
-} 
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
 
-.upload-button:hover {
-    background: #2980b9;
-} 
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
 
-/* Галерея */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-} 
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
 
-.gallery-item {
-    position: relative;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-} 
+        .gallery-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
 
-.gallery-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-} 
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
-.delete-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #e74c3c;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 3px;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s;
-} 
+        .gallery-item:hover .image-caption {
+            opacity: 1;
+        }
 
-.gallery-item:hover .delete-btn {
-    opacity: 1;
-}
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            
+            .gallery-image {
+                height: 200px;
+            }
+        }
+        /* Кнопка назад */
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 25px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
 
-/* Кнопка назад */
-.back-button {
-    display: inline-block;
-    background: #3498db;
-    color: white;
-    padding: 12px 25px;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-top: 20px;
-    transition: background 0.3s;
-} 
+        .back-button:hover {
+            background: #2980b9;
+        }
 
-.back-button:hover {
-    background: #2980b9;
-} 
-
-@media (max-width: 768px) {
-    .container {
-        padding: 10px;
-    }
-    
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
-}            
 /* Стили контента "Водный транспорт и теплоходы" */
         .container {
             max-width: 1200px;
