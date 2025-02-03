@@ -27,7 +27,7 @@
             <form class="upload-form" id="uploadForm" enctype="multipart/form-data">
                 <input type="file" class="upload-input" id="fileInput" accept="image/*" multiple>
                 <button type="submit" class="upload-button">Загрузить фото</button>
-                <small>Максимальный размер файла: 500 МБ</small>
+                <small>Максимальный размер файла: 900 МБ</small>
             </form>
       </section>
 
@@ -72,7 +72,7 @@
             const files = document.getElementById('fileInput').files;
 
             for(let file of files) {
-                if(file.size > 500 * 1024 * 1024) {
+                if(file.size > 900 * 1024 * 1024) {
                     alert('Файл слишком большой! Максимум 500 МБ');
                     continue;
                 }
