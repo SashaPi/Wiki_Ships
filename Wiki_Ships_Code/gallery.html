@@ -61,12 +61,6 @@
             renderGallery();
         }
 
-        // Сохранение фото
-        function savePhoto(index) {
-            galleryItems.splice(index, 1);
-            localStorage.setItem('gallery', JSON.stringify(galleryItems));
-        }
-
         // Загрузка сохраненных фото при загрузке страницы
         window.addEventListener('load', () => {
             const savedPhotos = JSON.parse(localStorage.getItem('galleryPhotos') || '[]');
